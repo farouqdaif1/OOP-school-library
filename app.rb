@@ -9,7 +9,7 @@ class App
   def initialize
     @books = load_book
     @people = load_people
-    @rentals = []
+    @rentals = load_rentlas
   end
 
   #   List all books.
@@ -62,7 +62,7 @@ class App
     person_number = gets.chomp.to_i
     print('Date:')
     date = gets.chomp
-    @rentals.push(Rental.new(date, @books[book_number - 1], @people[person_number - 1]))
+    write_rentals(Rental.new(date, @books[book_number - 1], @people[person_number - 1]))
     puts('Rental created Successfully')
   end
 
@@ -72,8 +72,8 @@ class App
     id = gets.chomp.to_i
     print('Rentals :')
     @rentals.each do |rental|
-      if rental.person.id == id
-        puts "Peson: #{rental.person.name} Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}"
+      if rental['id'] == id
+        puts "Peson: #{rental['person']} Date: #{rental['Date']} Book: #{rental['Book']}  by #{rental['author']}"
       else
         puts 'No Rentals found for the given ID'
       end
