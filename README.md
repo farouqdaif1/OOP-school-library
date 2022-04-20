@@ -9,12 +9,12 @@ Using Object Orient Programming to build a simple app.
 
 To get a local copy up and running follow these simple example steps.
 
-- copy this link `https://github.com/farouqdaif1/OOP-school-library`.
-- get the directory that you want to clone the repository.
+
 - open the command prompt in this directory.
 - write `https://github.com/farouqdaif1/OOP-school-library.git`.
 - go to the repository folder in your command prompt.
 - run `bundle install`.
+- run ruby main.rb
 
 ## Author
 
