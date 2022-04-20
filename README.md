@@ -22,12 +22,7 @@ To get a local copy up and running follow these simple example steps.
 
 - GitHub: [@farouqdaif1](https://github.com/farouqdaif1)
 - LinkedIn: [@Farouq Daif ](https://www.linkedin.com/in/farouqdaif/)\
-- 
-  ## 👤Author
 
-- GitHub: [@butlermuwo](https://github.com/butlermuwo)
-- Twitter: [@ButlerMuwo](https://twitter.com/ButlerMuwo)
-- LinkedIn: [butlermuwo](https://www.linkedin.com/in/butlermuwo/)
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
