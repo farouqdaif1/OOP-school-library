@@ -3,9 +3,12 @@ require_relative './book'
 require_relative './person'
 require_relative './teacher'
 require_relative './rental'
+require_relative './store_data'
 class App
+  include DataStore
   def initialize
-    @books = []
+    @books = load_book
+    # @books=[]
     @people = []
     @rentals = []
   end
@@ -14,7 +17,7 @@ class App
   def list_all_books
     puts('No books found') if @books.empty?
     @books.each_with_index do |book, index|
-      puts("(#{index + 1})- Title: #{book.title} , Author: #{book.author}")
+      puts("(#{index + 1})- Title: #{book['title']} , Author: #{book['author']}")
     end
   end
   # List all people.
@@ -46,7 +49,7 @@ class App
     title = gets.chomp
     print('Author:')
     author = gets.chomp
-    @books.push(Book.new(title, author))
+    write_books(title, author)
     puts('Book created Successfully')
   end
   #   Create a rental.
@@ -115,18 +118,15 @@ class App
     end
   end
 
-  def select_from_main
-    main_menue
-    num = gets.chomp.chomp.to_i
+  def select_from_main(num)
     case num
     when 1..4
       select_from_main1(num)
     when 5..7
       select_from_main2(num)
     else
-      "You gave me #{num} -- I have no idea what to do with that."
+      puts "You gave me #{num} -- I have no idea what to do with that."
     end
-    select_from_main
   end
 
   private
