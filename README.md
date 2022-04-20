@@ -21,7 +21,7 @@ To get a local copy up and running follow these simple example steps.
 👤 **Farouq Daif**
 
 - GitHub: [@farouqdaif1](https://github.com/farouqdaif1)
-- LinkedIn: [@Farouq Daif ](https://www.linkedin.com/in/farouqdaif/)\
+- LinkedIn: [@Farouq Daif ](https://www.linkedin.com/in/farouqdaif/)
 
 ## 🤝 Contributing
 
