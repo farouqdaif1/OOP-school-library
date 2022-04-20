@@ -3,26 +3,28 @@ require_relative './book'
 require_relative './person'
 require_relative './teacher'
 require_relative './rental'
+require_relative './store_data'
 class App
+  include DataStore
   def initialize
-    @books = []
-    @people = []
-    @rentals = []
+    @books = load_book
+    @people = load_people
+    @rentals = load_rentlas
   end
 
   #   List all books.
   def list_all_books
     puts('No books found') if @books.empty?
     @books.each_with_index do |book, index|
-      puts("(#{index + 1})- Title: #{book.title} , Author: #{book.author}")
+      puts("(#{index + 1})- Title: #{book['title']} , Author: #{book['author']}")
     end
   end
-  # List all people.
 
+  # List all people.
   def list_all_people
     puts('No person found') if @people.empty?
     @people.each_with_index do |person, index|
-      puts("(#{index + 1})- [#{person.class}] Name : #{person.name} ,ID: #{person.id} ,Age: #{person.age}")
+      puts("(#{index + 1})- #{person['class']}, Name : #{person['name']} ,ID: #{person['id']} ,Age: #{person['age']}")
     end
   end
   #   Create a person
@@ -46,7 +48,7 @@ class App
     title = gets.chomp
     print('Author:')
     author = gets.chomp
-    @books.push(Book.new(title, author))
+    write_books(title, author)
     puts('Book created Successfully')
   end
   #   Create a rental.
@@ -60,7 +62,7 @@ class App
     person_number = gets.chomp.to_i
     print('Date:')
     date = gets.chomp
-    @rentals.push(Rental.new(date, @books[book_number - 1], @people[person_number - 1]))
+    write_rentals(Rental.new(date, @books[book_number - 1], @people[person_number - 1]))
     puts('Rental created Successfully')
   end
 
@@ -70,8 +72,8 @@ class App
     id = gets.chomp.to_i
     print('Rentals :')
     @rentals.each do |rental|
-      if rental.person.id == id
-        puts "Peson: #{rental.person.name} Date: #{rental.date}, Book: '#{rental.book.title}' by #{rental.book.author}"
+      if rental['id'] == id
+        puts "Peson: #{rental['person']} Date: #{rental['Date']} Book: #{rental['Book']}  by #{rental['author']}"
       else
         puts 'No Rentals found for the given ID'
       end
@@ -115,18 +117,15 @@ class App
     end
   end
 
-  def select_from_main
-    main_menue
-    num = gets.chomp.chomp.to_i
+  def select_from_main(num)
     case num
     when 1..4
       select_from_main1(num)
     when 5..7
       select_from_main2(num)
     else
-      "You gave me #{num} -- I have no idea what to do with that."
+      puts "You gave me #{num} -- I have no idea what to do with that."
     end
-    select_from_main
   end
 
   private
@@ -142,9 +141,9 @@ class App
     permision = gets.chomp.capitalize
     case permision
     when 'Y'
-      @people.push(Student.new('classroom', age, name, true))
+      write_people(Student.new('classroom', age, name, true))
     when 'N'
-      @people.push(Student.new('classroom', age, name, false))
+      write_people(Student.new('classroom', age, name, false))
     else
       puts("You gave me #{permision} -- I have no idea what to do with that.")
     end
@@ -154,13 +153,13 @@ class App
   #   Create  teacher, not a plain Person.
 
   def create_teacher
-    puts('Age:')
+    print('Age:')
     age = gets.chomp
-    puts('Name:')
+    print('Name:')
     name = gets.chomp
-    puts('Specializtion:')
+    print('Specializtion:')
     specializtion = gets.chomp
-    @people.push(Teacher.new(specializtion, age, name))
-    puts('Person created Successfully')
+    write_people(Teacher.new(specializtion, age, name))
+    print('Person created Successfully')
   end
 end
