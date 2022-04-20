@@ -8,8 +8,7 @@ class App
   include DataStore
   def initialize
     @books = load_book
-    # @books=[]
-    @people = []
+    @people = load_people
     @rentals = []
   end
 
@@ -20,12 +19,12 @@ class App
       puts("(#{index + 1})- Title: #{book['title']} , Author: #{book['author']}")
     end
   end
-  # List all people.
 
+  # List all people.
   def list_all_people
     puts('No person found') if @people.empty?
     @people.each_with_index do |person, index|
-      puts("(#{index + 1})- [#{person.class}] Name : #{person.name} ,ID: #{person.id} ,Age: #{person.age}")
+      puts("(#{index + 1})- #{person['class']}, Name : #{person['name']} ,ID: #{person['id']} ,Age: #{person['age']}")
     end
   end
   #   Create a person
@@ -142,9 +141,9 @@ class App
     permision = gets.chomp.capitalize
     case permision
     when 'Y'
-      @people.push(Student.new('classroom', age, name, true))
+      write_people(Student.new('classroom', age, name, true))
     when 'N'
-      @people.push(Student.new('classroom', age, name, false))
+      write_people(Student.new('classroom', age, name, false))
     else
       puts("You gave me #{permision} -- I have no idea what to do with that.")
     end
@@ -154,13 +153,13 @@ class App
   #   Create  teacher, not a plain Person.
 
   def create_teacher
-    puts('Age:')
+    print('Age:')
     age = gets.chomp
-    puts('Name:')
+    print('Name:')
     name = gets.chomp
-    puts('Specializtion:')
+    print('Specializtion:')
     specializtion = gets.chomp
-    @people.push(Teacher.new(specializtion, age, name))
-    puts('Person created Successfully')
+    write_people(Teacher.new(specializtion, age, name))
+    print('Person created Successfully')
   end
 end
